@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stylish Food Habits Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .glass-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      width: 90%;
+      color: #fff;
+      animation: fadeSlide 0.6s ease;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4em;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeSlide 0.6s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ff6f61, #d94f70);
+      color: white;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    .page-number {
+      font-size: 0.9em;
+      text-align: right;
+      margin-bottom: 10px;
+      color: #ddd;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .glass-container {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-container">
+  <div class="page active" id="page1">
+    <div class="page-number">Page 1 of 2</div>
+    <h2>Nourish Naturally.</h2>
+    <p>Fuel your body with vibrant colors from nature. Think deep greens, juicy reds, and earthy browns — vegetables, fruits, grains. Every plate is a palette of wellness.</p>
+    <p>Start your day with a smoothie, snack on almonds, and embrace whole foods. It’s not about strict diets — it’s about loving your body through food.</p>
+  </div>
+
+  <div class="page" id="page2">
+    <div class="page-number">Page 2 of 2</div>
+    <h2>Eat with Intention 🧘‍♀️</h2>
+    <p>Pause. Breathe. Savor. Mindful eating is about reconnecting with your meals — turning off the screens and tuning into your senses.</p>
+    <p>Hydrate like it's a ritual, plan balanced meals, and listen to what your body *really* needs. You’re not just eating — you're building your future self.</p>
+  </div>
+
+  <div class="buttons">
+    <button id="prevBtn" disabled>← Previous</button>
+    <button id="nextBtn">Next →</button>
+  </div>
+</div>
+
+<script>
+  const pages = document.querySelectorAll(".page");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  let currentPage = 0;
+
+  function showPage(index) {
+    pages.forEach((page, i) => {
+      page.classList.toggle("active", i === index);
+    });
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === pages.length - 1;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < pages.length - 1) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  showPage(currentPage);
+</script>
+
+</body>
+</html>
